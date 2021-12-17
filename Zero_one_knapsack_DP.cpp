@@ -17,7 +17,7 @@ void print_table(int item,int capacity,vector<vector<int>>table)
        cout<<endl;
    }
 }
-void print_taken_item(int item,int capacity,vector<vector<int>>table)
+void print_taken_item(int item,int capacity,vector<vector<int>>table,int weight[])
 {
      vector<int>taken_item(item+1,0);
 
@@ -29,7 +29,7 @@ void print_taken_item(int item,int capacity,vector<vector<int>>table)
      {
          if(table[i][j]!=table[i-1][j])
          {
-             j-=table[i-1][j];
+             j-=weight[i-1];
              taken_item[i]=1;
              i--;
          }
@@ -45,7 +45,6 @@ void print_taken_item(int item,int capacity,vector<vector<int>>table)
      cout<<endl;
 
 }
-
 
 int Knapsack(int item,int capacity,int weight[],int profit[])
 {
@@ -79,7 +78,7 @@ int Knapsack(int item,int capacity,int weight[],int profit[])
 
     print_table(item,capacity,table);
     
-    print_taken_item(item,capacity,table);
+    print_taken_item(item,capacity,table,weight);
     
     return table[item][capacity];
 }
