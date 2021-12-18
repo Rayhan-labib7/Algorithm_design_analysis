@@ -13,48 +13,52 @@
 #include<bits/stdc++.h>
 #define ll                      long long int
 #define endl                    '\n'
-#define optimize() ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
 using namespace std;
 
-int Find_maximum_sub_arry(int a[],int low,int high)
+int FIND_MAXIMUM_Crossing_SUB_ARRY(int arry[],int low,int mid,int high)
 {
-    int n=high+1;
-    int mid;
-    if(low==high)
+    int left_sum=-1,sum=0;
+    for(int i=mid;i>=low;i--)
     {
-        return (a[low],low,high);
+        sum+=arry[i];
+        if(sum>left_sum)
+        {
+            left_sum=sum;
+        }
     }
-    else
-    {
-        mid=(low+high)/2;
-    }
-    int left_mss=Find_maximum_sub_arry(a,low,mid);
-    int right_mss=Find_maximum_sub_arry(a,mid+1,high);
-    int sum=0,right_sum=INT_MIN,left_sum=INT_MIN;
-    for(int i=mid;i<n;i++)
-    {
-        sum+=a[i];
-        right_sum=max(right_sum,sum);
-    }
+    int right_sum=-1;
     sum=0;
-    for(int i=(mid-1);i>=0;i--)
+    for(int i=mid+1;i<high;i++)
     {
-        sum+=a[i];
-        left_sum=max(left_sum,sum);
+        sum+=arry[i];
+        if(sum>right_sum)
+        {
+            right_sum=sum;
+        }
     }
-    int maxx=max(left_sum,right_sum);
-    return max(maxx,left_sum+right_sum);
+    return max(max(left_sum,right_sum),left_sum+right_sum);
 }
 
 
-
+int FIND_MAXIMUM_SUB_ARRY(int arry[],int low,int high)
+{
+    if(low==high)
+    {
+        return arry[low];
+    }
+    int mid=(low+high)/2;
+    return max(max(FIND_MAXIMUM_SUB_ARRY(arry,low,mid),FIND_MAXIMUM_SUB_ARRY(arry,mid+1,high)),FIND_MAXIMUM_Crossing_SUB_ARRY(arry,low,mid,high));
+}
 int main()
 {
+    int arry[]={-2,2,-8,3,-2,2,1,-4,3};
 
-   int a[]={3,-2,5,-1};
-   int siz = sizeof(a) / sizeof(a[0]);
-   int ans=Find_maximum_sub_arry(a,0,siz-1);
-   cout<<ans<<endl;
+    int Size=sizeof(arry)/sizeof(arry[0]);
+
+    int ansr=FIND_MAXIMUM_SUB_ARRY(arry,0,Size-1);
+
+    cout<<ansr<<endl;
+
 
 /*---------->HaPpY CoDiNg----------->*/
 return 0;
