@@ -31,7 +31,6 @@ void print_taken_item(int item,int capacity,vector<vector<int>>table,int weight[
          {
              j-=weight[i-1];
              taken_item[i]=1;
-             i--;
          }
          else
          {
