@@ -48,7 +48,7 @@ int main()
    int edge;
    int vertices;
    cin>>edge>>vertices;
-   dsuf.resize(vertices);
+   dsuf.resize(vertices+1);
    for(int i=0;i<vertices;i++)
    {
        dsuf[i].parent=-1;
