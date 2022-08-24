@@ -1,26 +1,30 @@
-/* Dynamic Programming C++ implementation of LIS problem */
+
 #include<bits/stdc++.h> 
 using namespace std; 
 	
-/* lis() returns the length of the longest increasing 
-subsequence in arr[] of size n */
+
 int lis( int arr[], int n ) 
-{ 
-	int lis[n]; 
+{  
 
-	lis[0] = 1; 
-
-	/* Compute optimized LIS values in bottom up manner */
+	vector<int>lis;
+   lis.push_back(arr[0]);
 	for (int i = 1; i < n; i++ ) 
 	{ 
-		lis[i] = 1; 
-		for (int j = 0; j < i; j++ ) 
-			if ( arr[i] > arr[j] && lis[i] < lis[j] + 1) 
-				lis[i] = lis[j] + 1; 
+		
+			if ( arr[i] > lis.back())
+         {
+            lis.push_back(arr[i]);
+         } 
+         else{
+            int idx=lower_bound(lis.begin(),lis.end(),arr[i]) - lis.begin();
+            lis[idx]=arr[i];
+         }
+				
+
 	} 
 
-	// Return maximum value in lis[] 
-	return *max_element(lis, lis+n); 
+	
+	return lis.size();
 } 
 	
 /* Driver program to test above function */
