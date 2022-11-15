@@ -324,9 +324,10 @@ ll *Z_algo(string s,ll n)
 		{
 			while(n%i==0)
 			{
-                n/=i;
-				cnt-=(cnt/i);  
+                            n/=i;
 			}
+				cnt-=(cnt/i);  
+			
 		}
 	}
 	if(n>1) //if n is greatter than squre of i*i
