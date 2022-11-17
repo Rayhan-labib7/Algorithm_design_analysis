@@ -66,3 +66,61 @@ int main()
    }
 
 }
+.............
+    
+    
+    
+    struct Node
+{
+    ll nd,cost;
+    Node(ll a,ll b)
+    {
+        nd=a;
+        cost=b;
+    }
+};
+struct Edge
+{
+    ll v,w;
+    Edge(ll a,ll b)
+    {
+        v=a;
+        w=b;
+    }
+};
+bool operator<(Node a,Node b)
+{
+    return a.cost>b.cost;
+}
+priority_queue<Node>pq;
+vector<Edge>graph[Max];
+ll dis[Max],parent[Max];
+ll node;
+
+void dijkstra()
+{
+    for(int i=1;i<=node;i++)
+    {
+        dis[i]=inf;
+    }
+    dis[1]=0;
+    pq.push(Node(1,0));
+    while (!pq.empty())
+    {
+        Node u=pq.top();
+        pq.pop();
+        if(u.cost!=dis[u.nd]) continue;
+        for(auto child:graph[u.nd])
+        {
+            Edge e=child;
+            if(dis[e.v]>u.cost+e.w)
+            {
+                dis[e.v]=u.cost+e.w;
+                pq.push(Node(e.v,dis[e.v]));
+                parent[e.v]=u.nd;
+            }
+        }
+    }
+    
+}
+...............
