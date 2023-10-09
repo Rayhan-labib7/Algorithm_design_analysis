@@ -497,3 +497,4 @@ ll nCr(ll n, ll r)
     }
     return dp[r];
 }
+and ncr formula=(n*(n-1)*(n-2)*(n-3))/24;
