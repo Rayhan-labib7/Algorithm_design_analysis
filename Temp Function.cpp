@@ -480,3 +480,20 @@ int main()
     int ans=Read(x);
     cout<<ans<<endl;
 --------------------------->>end--------------->>
+----------ncr dynamic programming------------>
+ll nCr(ll n, ll r)
+{
+    if(n<r)return 0;
+    if((n-r)<r) r=n-r;
+    ll dp[r+1];
+    memset(dp,0,sizeof(dp));
+    dp[0]=1;
+    for(ll i=1;i<=n;i++)
+    {
+        for(ll j=min(r,i);j>0;j--)
+        {
+            dp[j]=(dp[j]+dp[j-1]);
+        }
+    }
+    return dp[r];
+}
