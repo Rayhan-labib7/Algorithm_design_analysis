@@ -1,23 +1,18 @@
 ///-----------------------------------Sieve of Eratosthenes----------------------->>>>
-bool status[1000000+1];
-void siv(int n)
-{
-    int sq=sqrt(n);
-    for(int i=4;i<=n;i+=2)
-    {
-        status[i]=1;
-    }
-    for(int i=3;i<=sq;i+=2)
-    {
-        if(status[i]==0)
-        {
-            for(int j=i*i;j<=n;j+=i)
-            {
-                status[j]=1;
-            }
+bll prime_size=1e7+1;
+vector<ll>primes;
+vector<bool> mark(prime_size+4);
+void sieve(){
+    ll i,j;
+    mark[0]=mark[1]=1;
+    for(i=4; i<prime_size; i+=2)mark[i]=1;
+    for(i=3; i*i<=prime_size; i+=2){
+        if(!mark[i]){
+            for(j=i*i; j<=prime_size; j+=i*2)mark[j]=1;
         }
     }
-    status[1]=1;
+    primes.push_back(2);
+    for(i=3; i<=prime_size; i+=2)if(!mark[i])primes.push_back(i);
 }
 ///------------------>another sieve------------>>>>>>>>>
 void siv(int n)
