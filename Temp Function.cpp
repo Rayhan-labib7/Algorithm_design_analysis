@@ -14,28 +14,19 @@ void sieve(){
     primes.push_back(2);
     for(i=3; i<=prime_size; i+=2)if(!mark[i])primes.push_back(i);
 }
-///------------------>another sieve------------>>>>>>>>>
-void siv(int n)
+///------------------>smaller prime factor ------------>>>>>>>>>
+const int N = 202222;
+vector<int>pf(N);
+
+void smallestpf()
 {
-    int sq=sqrt(n);
-    for(int i=1; i<=n; i++)
-    {
-        status[i]=i;
-    }
-    for(int i=2; i<=sq; i++)
-    {
-        if(status[i]==i)
-        {
-            status[i]=i;
-            for(int j=i*i; j<=n; j+=i)
-            {
-                if(status[j]==j)
-                {
-                    status[j]=i;
-                }
-            }
-        }
-    }
+    for(int i=2; i<N; i+=2)
+        pf[i]=2,pf[i-1]=i-1;
+    for(int i=3; i*i<N; i+=2)
+        if(pf[i]==i)
+            for(int j=i*i; j<N; j+=2*i)
+                if(pf[j]==j)
+                    pf[j]=i;
 }
 ///---------efficent sieve->>
 #define SIZEE 18000000
