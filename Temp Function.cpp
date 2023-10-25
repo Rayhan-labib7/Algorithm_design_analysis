@@ -29,21 +29,29 @@ void smallestpf()
                     pf[j]=i;
 }
 ///---------efficent sieve->>
-#define SIZEE 18000000
-vector<int> prime; /*Stores generated primes*/
-char sieve[SIZEE+5]; /*0 means prime*/
-void primeSieve ( int n ) {              /// O(sqrt(N)/ln(sqrt(N))
-    sieve[0] = sieve[1] = 1; /*0 and 1 are not prime*/
-
-    prime.push_back(2); /*Only Even Prime*/
-    int sqrtn = sqrt ( n );
-    for ( int i = 3; i <= sqrtn; i += 2 ) {
-        if ( sieve[i] == 0 ) {
-            for ( int j = i * i; j <= n; j += 2 * i ) sieve[j] = 1;
+const int N=1e5+10;
+vector<ll>v(N);
+vector<int>primes;
+bitset<100000001>vis;
+vector<pair<int,int>>tree(N*4);
+void sieve()
+{
+    int n = 100000000;
+    for(int i=2; i<=n; i++) vis[i] = 1;
+    for(int i=3; i*i<=n; i+=2)
+    {
+        if(vis[i])
+        {
+            for(int j=i*i; j<=n; j+=i)
+                vis[j] = 0;
         }
     }
-
-    for ( int i = 3; i <= n; i += 2 ) if ( sieve[i] == 0 ) prime.push_back(i);
+    primes.push_back(2);
+    for(int i=3; i<=n; i+=2)
+    {
+        if(vis[i])
+            primes.push_back(i);
+    }
 }
 
 //Another sieve
