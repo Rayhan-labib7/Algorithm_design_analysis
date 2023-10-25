@@ -1,5 +1,5 @@
 ///-----------------------------------Sieve of Eratosthenes----------------------->>>>
-bll prime_size=1e7+1;
+ll prime_size=1e7+1;
 vector<ll>primes;
 vector<bool> mark(prime_size+4);
 void sieve(){
