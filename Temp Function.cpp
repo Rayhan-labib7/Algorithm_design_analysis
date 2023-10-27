@@ -29,7 +29,7 @@ void smallestpf()
                     pf[j]=i;
 }
 ///---------------------------------------------factorize----------------------------->>
-const ll N=12;
+const int N = 202222;
 vector<vector<int>>fact(N);
 void factorize(){
 	for(int i=1; i*i<N; i++){
