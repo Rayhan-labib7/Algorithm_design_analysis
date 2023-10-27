@@ -28,30 +28,19 @@ void smallestpf()
                 if(pf[j]==j)
                     pf[j]=i;
 }
-///---------efficent sieve->>
-const int N=1e5+10;
-vector<ll>v(N);
-vector<int>primes;
-bitset<100000001>vis;
-vector<pair<int,int>>tree(N*4);
-void sieve()
-{
-    int n = 100000000;
-    for(int i=2; i<=n; i++) vis[i] = 1;
-    for(int i=3; i*i<=n; i+=2)
-    {
-        if(vis[i])
-        {
-            for(int j=i*i; j<=n; j+=i)
-                vis[j] = 0;
-        }
-    }
-    primes.push_back(2);
-    for(int i=3; i<=n; i+=2)
-    {
-        if(vis[i])
-            primes.push_back(i);
-    }
+///---------------------------------------------factorize----------------------------->>
+const ll N=12;
+vector<vector<int>>fact(N);
+void factorize(){
+	for(int i=1; i*i<N; i++){
+		for(int j=i; j*i<N; j++){
+			fact[i*j].push_back(i);
+			if(i!=j)
+            {
+                fact[i*j].push_back(j);
+            }
+		}
+	}
 }
 
 //Another sieve
