@@ -8,15 +8,31 @@ void dfs(int node)
     for(auto child : adj[node])
     {
        depth[child]=depth[node]+1;
-       up[child][0]=node;
-       for(int j=1;j<LOG;j++)
-       {
-         up[child][j]=up[up[child][j-1]][j-1];
-       }
        dfs(child);
     }
 }
+void spare_table(int N)
+{
+  for(int j = 1; j < LOG; j++)
+  {
+    for(int i = 1; i <= N; i++)
+    {
+       if(up[i][j-1] != -1)
+       {
+         up[i][j] = up[up[i][j-1]][j-1];
+       }
+       
+     }
+  }
+}
+int kth(int a, int k){
 
+	for(int i = 0; i <= LOG; i++){
+		if(k & (1 << i))
+			a = up[a][i];
+	}
+	return a;
+}
 int get_lca(int a, int b)
   {
       if(depth[a]<depth[b])
