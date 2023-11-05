@@ -17,6 +17,14 @@ class LCA{
        dfs(child,node);
     }
  }
+int kth(int a, int k){
+ 
+	for(int i = 0; i <= LOG; i++){
+		if(k & (1 << i))
+			a = up[a][i];
+	}
+	return a;
+}
  void spare_table(int N)
  {
   for(int j = 1; j < LOG; j++)
