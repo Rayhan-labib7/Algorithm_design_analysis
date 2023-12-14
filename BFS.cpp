@@ -1,37 +1,48 @@
-#include<bits/stdc++.h>
-using namespace std;
-int main()
+class BFS
 {
-    int no_edge,no_node;
-    cin>>no_edge>>no_node;
-    vector<vector<int>>edges_list(no_node+1);
-    for(int i = 0 ; i<no_edge;i++)
-    {
-        int a,b;
-        cin>>a>>b;
-        edges_list[a].push_back(b);
-        edges_list[b].push_back(a);
-    }
+  public:
+  int n,u,v;
+  vector<vector<int>>adj;
+  vector<bool>vis;
+  vector<int>color;
+  BFS(int _n)
+  {
+     n=_n;
+     adj.resize(n+1);
+     color.resize(n+1);
+     vis.resize(n+1);
+  }
+  void input_read(int _u,int _v)
+  {
+    u=_u;
+    v=_v;
+    adj[u].push_back(v);
+    adj[v].push_back(u);
+  }
+  bool bfs(int node)
+  {
     queue<int>q;
-    vector<int>vis(no_node+1,-1);
-    q.push(1);
-    vis[1]=0;
-    while(!q.empty())
+    q.push(node);
+    vis[node]=true;
+    color[node]=0;
+    while (!q.empty())
     {
-        int top=q.front();
+        int top = q.front();
         q.pop();
-        for(auto to : edges_list[top])
+        for(auto child:adj[top])
         {
-            if(vis[to]==-1)
-            {
-                vis[to]=vis[top]+1;
-                q.push(to);
-            }
+           if(!vis[child]){
+            vis[child]=true;
+            q.push(child);
+            color[child]=(color[top]^1);
+           }
+           else if(color[top]==color[child]){
+             return false;
+           }
+
         }
     }
-    for(int i=1;i<=no_node;i++)
-    {
-        cout<<"node "<<i<<" >> "<<vis[i]<<endl;  // node level
-    }
+    return true;
     
-}
+  }
+};
